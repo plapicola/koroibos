@@ -1,13 +1,12 @@
 var Olympian = require('../../models/olympian')
 var shell = require('shelljs')
+var firstId;
 
 describe('Olympian Model', () => {
   beforeAll(() => {
     shell.exec('npx knex migrate:rollback --all');
     shell.exec('npx knex migrate:latest');
   })
-
-  const firstId;
 
   test("Create", () => {
     return Olympian.create({name: "Test!", age: 25, height: 150, weight: 140, sex: "M"})
@@ -37,7 +36,7 @@ describe('Olympian Model', () => {
   })
 
   test("find", () => {
-    return Olympian.one(firstId)
+    return Olympian.find(firstId)
       .then(olympian => {
         expect(typeof(olympian.id)).toBe("number")
         expect(olympian.name).toBe("Test!")
