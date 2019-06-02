@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "npx jest --passWithNoTests --runInBand"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -17,6 +18,7 @@
     "babel-jest": "^24.8.0",
     "jest": "^24.8.0",
     "pryjs": "^1.0.3",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.3",
+    "supertest": "^4.0.2"
   }
 }

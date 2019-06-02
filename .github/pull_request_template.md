@@ -1,4 +1,4 @@
-### What functionality does this PR inclide?
+### What functionality does this PR include?
 
 ### Known Issues
 
