@@ -8,4 +8,8 @@ module.exports = class Olympian {
       .catch(error => reject(error))
     })
   }
+
+  static all() {
+    return knex("olympians").select("*")
+  }
 }

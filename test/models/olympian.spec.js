@@ -3,8 +3,8 @@ var shell = require('shelljs')
 
 describe('Olympian Model', () => {
   beforeAll(() => {
-    shell.exec('ENVIRONMENT=test npx knex migrate:rollback --all');
-    shell.exec('ENVIRONMENT=test npx knex migrate:latest');
+    shell.exec('npx knex migrate:rollback --all');
+    shell.exec('npx knex migrate:latest');
   })
 
   test("Create", () => {
@@ -23,7 +23,7 @@ describe('Olympian Model', () => {
     return Olympian.all()
       .then(olympians => {
         expect(olympians.length).toBe(1)
-        olympian = olympian[0]
+        let olympian = olympians[0]
         expect(typeof(olympian.id)).toBe("number")
         expect(olympian.name).toBe("Test!")
         expect(olympian.age).toBe(25)
