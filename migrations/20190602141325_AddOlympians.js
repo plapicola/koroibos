@@ -5,9 +5,10 @@ exports.up = function(knex, Promise) {
       table.increments();
       table.string("name");
       table.integer("age");
-      table.integer("height")
-      table.enu("sex", ["M", "F"])
-      table.timestamps(true, true)
+      table.integer("height");
+      table.integer("weight");
+      table.enu("sex", ["M", "F"]);
+      table.timestamps(true, true);
     })
 };
 
