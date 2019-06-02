@@ -21,7 +21,7 @@ describe("Team model", () => {
     return Team.all()
       .then(teams => {
         expect(teams.length).toBe(1)
-        [team] = teams;
+        team = teams[0];
         expect(team.id).toBe(createdId);
         expect(team.name).toBe("Canada")
       })
