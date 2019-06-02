@@ -18,4 +18,18 @@ describe('Olympian Model', () => {
         expect(olympian.sex).toBe("M")
       })
   })
+
+  test("all", () => {
+    return Olympian.all()
+      .then(olympians => {
+        expect(olympians.length).toBe(1)
+        olympian = olympian[0]
+        expect(typeof(olympian.id)).toBe("number")
+        expect(olympian.name).toBe("Test!")
+        expect(olympian.age).toBe(25)
+        expect(olympian.height).toBe(150)
+        expect(olympian.weight).toBe(140)
+        expect(olympian.sex).toBe("M")
+      })
+  })
 })
