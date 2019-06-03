@@ -93,5 +93,19 @@ describe("Application", () => {
       await Event.create({name: "Platform Dive", sport_id: divingId}).then(([e]) => platformId = e.id)
       await Event.create({name: "Springboard", sport_id: divingId}).then(([e]) => springboardId = e.id)
     })
+
+    test("Events index endpoint returns all events by sport", () => {
+      return request(app).get("/api/v1/events")
+        .then(response => {
+          expect(response.status).toBe(200)
+          expect(Array.isArray(response.body.events)).toBe(true)
+          events = response.body.events
+          expect(events.length).toBe(2)
+          expect(events[0].sport).toBe("Athletics")
+          expect(Array.isArray(events[0].events)).toBe(true)
+          expect(events[0].events[0]).toBe("Platform Dive")
+          expect(events[0].events[0]).toBe("Springboard")
+        })
+    })
   })
 })
