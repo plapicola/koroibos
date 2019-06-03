@@ -1,11 +1,11 @@
 var app = require('../app')
 var request = require('supertest')
 var shell = require('shelljs')
-var Olympian = require('../../models/olympian')
-var Team = require('../../models/team')
-var Sport = require('../../models/sport')
-var Event = require('../../models/event')
-var EventMedalist = require('../../models/event_medalist')
+var Olympian = require('../models/olympian')
+var Team = require('../models/team')
+var Sport = require('../models/sport')
+var Event = require('../models/event')
+var EventMedalist = require('../models/event_medalist')
 var ryanId, michaelId, canadaId, germanyId, athleticsId, divingId, sprintId, platformId, eventMedalistId;
 
 describe("Application", () => {
@@ -19,7 +19,7 @@ describe("Application", () => {
   })
 
   describe("Olympians Index Endpoint", () => {
-    beforeAll(() => {
+    beforeAll(async () => {
       shell.exec('npx knex migrate:rollback --all')
       shell.exec('npx knex migrate:latest')
       await Team.create({name: "Canada"}).then(([team]) => canadaId = team.id)

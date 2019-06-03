@@ -13,6 +13,21 @@ module.exports = class Olympian {
     return knex("olympians").select("*")
   }
 
+  static all_for_request() {
+    return knex("olympians")
+      .select({
+        name: "olympians.name",
+        team: "teams.name",
+        age: "olympians.age",
+        sport: "sports.name",
+        total_medals_won: knex.raw("COUNT(event_medalists.medal)")
+      })
+     .innerJoin("teams", "olympians.team_id", "teams.id")
+     .innerJoin("sports", "olympians.sport_id", "sports.id")
+     .leftJoin("event_medalists", "olympians.id", "event_medalists.olympian_id")
+     .groupByRaw("sports.name, teams.name, olympians.id");
+  }
+
   static find(id) {
     return new Promise((resolve, reject) => {
       knex("olympians").select("*").where('id', id).limit(1)
