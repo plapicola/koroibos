@@ -18,6 +18,7 @@ function selectAge(ageParam) {
   return new Promise((resolve, reject) => {
     switch (ageParam) {
       case 'youngest': resolve(OlympiansIndexFacade.retreive_youngest()); break;
+      case 'oldest': resolve(OlympiansIndexFacade.retreive_oldest()); break;
       default: resolve(OlympiansIndexFacade.retreive_all()); break;
     }
   })
