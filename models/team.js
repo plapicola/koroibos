@@ -4,7 +4,7 @@ module.exports = class Team {
   static create(team) {
     return new Promise((resolve, reject) => {
       knex('teams').insert(team).returning("*")
-      .then(team => resolve(team))
+      .then(teams => resolve(teams))
       .catch(error => reject(error))
     })
   }
