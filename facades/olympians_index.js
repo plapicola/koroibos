@@ -21,4 +21,12 @@ module.exports = class OlympiansIndexFacade {
       .catch(error => reject(new OlympiansIndexFacade(500, error)))
     })
   }
+
+  static retreive_oldest() {
+    return new Promise((resolve, reject) => {
+      Olympian.oldest_for_request()
+      .then(olympians => resolve(new OlympiansIndexFacade(200, olympians)))
+      .catch(error => reject(new OlympiansIndexFacade(500, error)))
+    })
+  }
 }
