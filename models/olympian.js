@@ -25,6 +25,7 @@ module.exports = class Olympian {
      .innerJoin("teams", "olympians.team_id", "teams.id")
      .innerJoin("sports", "olympians.sport_id", "sports.id")
      .leftJoin("event_medalists", "olympians.id", "event_medalists.olympian_id")
+     .orderBy("olympians.id")
      .groupByRaw("sports.name, teams.name, olympians.id");
   }
 
