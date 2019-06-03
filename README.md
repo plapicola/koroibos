@@ -61,3 +61,28 @@ Lastly, the application accepts a query parameter to return only the oldest olym
   ]
 }
 ```
+
+##### GET /api/v1/events
+
+The application can return a list of all events, grouped by the sport. A sample response can be found below:
+
+``` JSON
+{
+  "events": [
+    {
+      "sport": "Archery",
+      "events": [
+        {
+          "id": 1,
+          "name": "Archery Men's Individual"
+        },
+        {
+          "id": 2,
+          "name": "Archery Men's Team"
+        }
+      ]
+    },
+    {...}
+  ]
+}
+```
