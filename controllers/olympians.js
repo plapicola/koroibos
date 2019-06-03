@@ -15,7 +15,6 @@ module.exports = class OlympiansController {
 }
 
 function selectAge(ageParam) {
-  console.log(ageParam);
   return new Promise((resolve, reject) => {
     switch (ageParam) {
       case 'youngest': resolve(OlympiansIndexFacade.retreive_youngest()); break;
