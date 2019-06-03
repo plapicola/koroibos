@@ -20,4 +20,17 @@ module.exports = class Sport {
       .catch(error => reject(error))
     })
   }
+
+  static with_events() {
+    return new Promise((resolve, reject) => {
+      knex('sports').select({
+        name: 'sports.name',
+        events: knex.raw("json_agg(events)")
+      })
+      .leftJoin('events', 'events.sport_id', 'sports.id')
+      .groupBy("sports.name")
+      .then(sports => resolve(sports))
+      .catch(error => reject(error))
+    })
+  }
 }
