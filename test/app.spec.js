@@ -6,7 +6,7 @@ var Team = require('../models/team')
 var Sport = require('../models/sport')
 var Event = require('../models/event')
 var EventMedalist = require('../models/event_medalist')
-var ryanId, michaelId, canadaId, germanyId, athleticsId, divingId, sprintId, platformId, eventMedalistId;
+var ryanId, michaelId, canadaId, germanyId, athleticsId, divingId, sprintId, hurdlesId, platformId, springboardId, eventMedalistId;
 
 describe("Application", () => {
   describe("Root path", () => {
@@ -79,6 +79,19 @@ describe("Application", () => {
           expect(olympians[0].sport).toBe("Diving")
           expect(olympians[0].total_medals_won).toBe(0)
         })
+    })
+  })
+
+  describe("Events Index Endpoint", () => {
+    beforeAll(async () => {
+      shell.exec('npx knex migrate:rollback --all')
+      shell.exec('npx knex migrate:latest')
+      await Sport.create({name: "Athletics"}).then(([sport]) => athleticsId = sport.id)
+      await Sport.create({name: "Diving"}).then(([sport]) => divingId = sport.id)
+      await Event.create({name: "400M Sprint", sport_id: athleticsId}).then(([e]) => sprintId = e.id)
+      await Event.create({name: "200M Hurdles", sport_id: athleticsId}).then(([e]) => hurdlesId = e.id)
+      await Event.create({name: "Platform Dive", sport_id: divingId}).then(([e]) => platformId = e.id)
+      await Event.create({name: "Springboard", sport_id: divingId}).then(([e]) => springboardId = e.id)
     })
   })
 })
