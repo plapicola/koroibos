@@ -4,7 +4,7 @@ var OlympiansSerializer = require('../serializers/olympians');
 module.exports = class OlympiansController {
   static index(req, res) {
     res.setHeader("Content-Type", "application/json")
-    OlympiansIndexFacade.retreive_all()
+    selectAge(req.params.age)
     .then(facade => {
       res.status(facade.status).send(OlympiansSerializer.formatAll(facade.body))
     })
@@ -12,4 +12,13 @@ module.exports = class OlympiansController {
       res.status(facade.status).send(facade.body)
     })
   }
+}
+
+function selectAge(ageParam) {
+  return new Promise((resolve, reject) => {
+    switch (ageParam) {
+      case 'youngest': resolve(OlympiansIndexFacade.retreive_youngest()); break;
+      default: resolve(OlympiansIndexFacade.retreive_all()); break;
+    }
+  })
 }
