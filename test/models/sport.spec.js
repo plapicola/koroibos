@@ -4,15 +4,15 @@ var sportId;
 
 describe('Sport Model', () => {
   beforeAll(() => {
-    shell.exec('npx knex migrate:revert --all')
-    shell.exec('npx knex migrate:latest')
+    shell.exec('npx knex migrate:rollback --all');
+    shell.exec('npx knex migrate:latest');
   })
 
   test('Create', () => {
     return Sport.create({name: "Athletics"})
-      .then([sport] => {
-        expect(typeof(sport.id)).toBe("number")
+      .then(([sport]) => {
         sportId = sport.id
+        expect(typeof(sport.id)).toBe("number")
         expect(sport.name).toBe("Athletics")
       })
   })
