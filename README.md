@@ -28,3 +28,20 @@ The application can return a list of all olympians. A sample response can be fou
     ]
 }
 ```
+
+Additionally, the application accepts a query parameter to return only the youngest olympian, in the format `age=youngest`. This will result in only the youngest olympian being returned.
+
+``` JSON
+{
+  "olympians":
+    [
+      {
+        "name": "Maha Abdalsalam",
+        "team": "Egypt",
+        "age": 18,
+        "sport": "Diving",
+        "total_medals_won": 0
+      }
+    ]
+}
+```
