@@ -65,5 +65,20 @@ describe("Application", () => {
           expect(olympians[0].total_medals_won).toBe(1)
         })
     })
+
+    test("Returns oldest olympian", () => {
+      return request(app).get("/api/v1/olympians?age=oldest")
+        .then(response => {
+          expect(response.status).toBe(200)
+          expect(Array.isArray(response.body.olympians)).toBe(true)
+          olympians = response.body.olympians
+          expect(olympians.length).toBe(1)
+          expect(olympians[0].name).toBe("Michael Fassbender")
+          expect(olympians[0].team).toBe("Germany")
+          expect(olympians[0].age).toBe(43)
+          expect(olympians[0].sport).toBe("Diving")
+          expect(olympians[0].total_medals_won).toBe(0)
+        })
+    })
   })
 })
