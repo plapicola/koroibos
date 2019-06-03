@@ -5,6 +5,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var olympiansRouter = require('./routes/api/v1/olympians');
+var eventsRouter = require('./routes/api/v1/events');
 
 var app = express();
 
@@ -16,5 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/v1/olympians', olympiansRouter);
+app.use('/api/v1/events', eventsRouter);
 
 module.exports = app;
