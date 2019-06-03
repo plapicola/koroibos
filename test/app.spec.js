@@ -103,8 +103,12 @@ describe("Application", () => {
           expect(events.length).toBe(2)
           expect(events[0].sport).toBe("Athletics")
           expect(Array.isArray(events[0].events)).toBe(true)
-          expect(events[0].events[0]).toBe("Platform Dive")
-          expect(events[0].events[0]).toBe("Springboard")
+          event_1 = events[0].events[0]
+          expect(event_1.name).toBe("400M Sprint")
+          expect(event_1.id).toBe(sprintId)
+          event_2 = events[0].events[1]
+          expect(event_2.name).toBe("200M Hurdles")
+          expect(event_2.id).toBe(hurdlesId)
         })
     })
   })
