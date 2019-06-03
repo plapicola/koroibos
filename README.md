@@ -45,3 +45,19 @@ Additionally, the application accepts a query parameter to return only the young
     ]
 }
 ```
+
+Lastly, the application accepts a query parameter to return only the oldest olympian, in the format `age=oldest`. This will result in only the oldest olympian being returned.
+
+``` JSON
+{
+ "olympians":  [
+    {
+      "name": "Julie Brougham",
+      "team": "New Zealand",
+      "age": 62,
+      "sport": "Equestrianism",
+      "total_medals_won": 0
+    }
+  ]
+}
+```
