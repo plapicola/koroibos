@@ -34,5 +34,21 @@ describe("Application", () => {
       await Event.create({name: "Platform Dive", sport_id: divingId}).then(([e]) => platformId = e.id)
       await EventMedalist.create({olympian_id: ryanId, event_id: sprintId, medal: "Gold"})
     })
+
+    test("Returns all olympians", () => {
+      return request(app).get("/api/v1/olympians")
+        .then(response => {
+          expect(response.status).toBe(200)
+          expect(Array.isArray(response.body.olympians)).toBe(true)
+          olympians = response.body.olympians
+          expect(olympians.length).toBe(2)
+          expect(olympians[0].name).toBe("Ryan Reynolds")
+          expect(olympians[0].team).toBe("Canada")
+          expect(olympians[0].age).toBe(42)
+          expect(olympians[0].sport).toBe("Athletics")
+          expect(olympians[0].total_medals_won).toBe(1)
+          expect(olympians[1].total_medals_won).toBe(0)
+        })
+    })
   })
 })
