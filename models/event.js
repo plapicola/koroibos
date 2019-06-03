@@ -4,7 +4,7 @@ module.exports = class Event {
   static create(e) {
     return new Promise((resolve, reject) => {
       knex('events').insert(e).returning("*")
-      .then(([e]) => resolve(e))
+      .then(e => resolve(e))
       .catch(error => reject(error))
     })
   }
