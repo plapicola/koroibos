@@ -50,5 +50,20 @@ describe("Application", () => {
           expect(olympians[1].total_medals_won).toBe(0)
         })
     })
+
+    test("Returns youngest olympian", () => {
+      return request(app).get("/api/v1/olympians?age=youngest")
+        .then(response => {
+          expect(response.status).toBe(200)
+          expect(Array.isArray(response.body.olympians)).toBe(true)
+          olympians = response.body.olympians
+          expect(olympians.length).toBe(1)
+          expect(olympians[0].name).toBe("Ryan Reynolds")
+          expect(olympians[0].team).toBe("Canada")
+          expect(olympians[0].age).toBe(42)
+          expect(olympians[0].sport).toBe("Athletics")
+          expect(olympians[0].total_medals_won).toBe(1)
+        })
+    })
   })
 })
