@@ -1,4 +1,5 @@
 var Event = require('../../models/event')
+var Sport = require('../../models/sport')
 var shell = require('shelljs')
 var eventId;
 var sportId;
