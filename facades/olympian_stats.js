@@ -1,5 +1,4 @@
 var Olympian = require('../models/olympian')
-var pry = require('pryjs')
 
 module.exports = class OlympianStatsIndexFacade {
   constructor(status, body) {
