@@ -1,13 +1,12 @@
 const parse = require('csv-parse/lib/sync')
 const assert = require('assert')
 const fs = require('fs')
-var Olympian = require('../models/olympian')
-var Team = require('../models/team')
-var Sport = require('../models/sport')
-var Event = require('../models/event')
-var EventMedalist = require('../models/event_medalist')
-var OlympianEvent = require('../models/olympian_event')
-var pry = require('pryjs')
+var Olympian = require('./models/olympian')
+var Team = require('./models/team')
+var Sport = require('./models/sport')
+var Event = require('./models/event')
+var EventMedalist = require('./models/event_medalist')
+var OlympianEvent = require('./models/olympian_event')
 
 const input = fs.readFileSync('data.csv', {encoding: "utf-8"});
 
@@ -20,7 +19,9 @@ createRecords(records);
 
 
 async function createRecords(records) {
+  console.log("Populating Database...")
   for(var i = 0; i < records.length; i++) {
+    console.log(`Loading record ${i}/${records.length}`)
     var current = records[i]
     var team = await Team.find_or_create({name: current.Team})
     var sport = await Sport.find_or_create({name: current.Sport})
@@ -31,12 +32,6 @@ async function createRecords(records) {
       var em = await EventMedalist.create({olympian_id: olympian.id, event_id: e.id, medal: current.Medal})
     }
   }
+  console.log("Loading complete.")
+  process.exit(0)
 }
-
-// Order:
-// Team
-// Sport
-// Olympian
-// Event
-// EventMedalist
-// OlympianEvemt
