@@ -24,7 +24,7 @@ async function createRecords(records) {
     var current = records[i]
     var team = await Team.find_or_create({name: current.Team})
     var sport = await Sport.find_or_create({name: current.Sport})
-    var olympian = await Olympian.find_or_create({name: current.Name, sex: current.Sex, age: current.Age, height: (parseInt(current.Height) || 0), weight: (parseInt(current.Weight) || 0)})
+    var olympian = await Olympian.find_or_create({name: current.Name, sex: current.Sex, age: current.Age, sport_id: sport.id, team_id: team.id, height: (parseInt(current.Height) || 0), weight: (parseInt(current.Weight) || 0)})
     var e = await Event.find_or_create({name: current.Event, sport_id: sport.id})
     var oe = await OlympianEvent.create({olympian_id: olympian.id, event_id: e.id})
     if (current.Medal !== 'NA') {

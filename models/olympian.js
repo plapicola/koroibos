@@ -91,6 +91,8 @@ module.exports = class Olympian {
       .where("name", olympian.name)
       .where("sex", olympian.sex)
       .where("age", olympian.age)
+      .where("team_id", olympian.team_id)
+      .where("sport_id", olympian.sport_id)
       .where("height", olympian.height)
       .where("weight", olympian.weight)
       .then((olympian) => {
