@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
+    "csv-parse": "^4.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "knex": "^0.17.2",
