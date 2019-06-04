@@ -20,4 +20,16 @@ module.exports = class Event {
       .catch(error => reject(error))
     })
   }
+
+  static medalists(id) {
+    return knex('events').select({
+      event: "events.name",
+      medalists: knex.raw("json_agg(json_build_object(?::text, event_medalists.medal, ?::text, olympians.name, ?::text, olympians.age, ?::text, teams.name))", ['medal', 'name', 'age', 'team'])
+    })
+    .leftJoin("event_medalists", "events.id", "event_medalists.event_id")
+    .leftJoin("olympians", "olympians.id", "event_medalists.olympian_id")
+    .leftJoin("teams", "teams.id", "olympians.team_id")
+    .where("events.id", id)
+    .groupByRaw("events.name")
+  }
 }
