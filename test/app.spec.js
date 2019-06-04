@@ -137,9 +137,9 @@ describe("Application", () => {
           stats = response.body.olympian_stats
           expect(stats.total_competing_olympians).toBe(2)
           expect(stats.average_weight.unit).toBe("kg")
-          expect(stats.average_weight.male_olympians).toBe(140)
-          expect(stats.average_weight.female_olympians).toBe(110)
-          expect(stats.averae_age).toBe(34)
+          expect(parseFloat(stats.average_weight.male_olympians)).toBe(parseFloat(140))
+          expect(parseFloat(stats.average_weight.female_olympians)).toBe(parseFloat(110))
+          expect(parseFloat(stats.average_age)).toBe(parseFloat(34))
         })
     })
   })
