@@ -32,4 +32,15 @@ module.exports = class Event {
     .where("events.id", id)
     .groupByRaw("events.name")
   }
+
+  static find_or_create(e) {
+    return new Promise((resolve, reject) => {
+      knex('events').where("name", e.name).where("sport_id", e.sport_id)
+      .then((events) => {
+        return events.length ? events : Event.create(e)
+      })
+      .then(([e]) => resolve(e))
+      .catch(error => reject(error))
+    })
+  }
 }

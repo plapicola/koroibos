@@ -87,7 +87,7 @@ module.exports = class Olympian {
 
   static find_or_create(olympian) {
     return new Promise((resolve, reject) => {
-      knex('olympian')
+      knex('olympians')
       .where("name", olympian.name)
       .where("sex", olympian.sex)
       .where("age", olympian.age)
@@ -95,8 +95,8 @@ module.exports = class Olympian {
       .where("sport_id", olympian.sport_id)
       .where("height", olympian.height)
       .where("weight", olympian.weight)
-      .then((olympian) => {
-        return olympian.length ? olympian : Olympian.create(olympian)
+      .then((olympians) => {
+        return olympians.length ? olympians : Olympian.create(olympian)
       })
       .then(([olympian]) => resolve(olympian))
       .catch(error => reject(error))
