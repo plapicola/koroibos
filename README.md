@@ -104,3 +104,27 @@ The application can return a series of statistics about the olympians participat
    }
  }
 ```
+
+##### GET /api/v1/events/:id/medalists
+
+The application can return all the medalists for a particular event. A sample response can be found below:
+
+``` JSON
+{
+  "event": "Badminton Mixed Doubles",
+  "medalists": [
+      {
+        "name": "Tontowi Ahmad",
+        "team": "Indonesia-1",
+        "age": 29,
+        "medal": "Gold"
+      },
+      {
+        "name": "Chan Peng Soon",
+        "team": "Malaysia",
+        "age": 28,
+        "medal": "Silver"
+      }
+    ]
+}
+```
