@@ -86,3 +86,21 @@ The application can return a list of all events, grouped by the sport. A sample 
   ]
 }
 ```
+
+##### GET /api/v1/olympian_stats
+
+The application can return a series of statistics about the olympians participating in the games. A sample response can be found below:
+
+``` JSON
+{
+   "olympian_stats": {
+     "total_competing_olympians": 3120,
+     "average_weight": {
+       "unit": "kg",
+       "male_olympians": 75.4,
+       "female_olympians": 70.2
+     },
+     "average_age": 26.2
+   }
+ }
+```

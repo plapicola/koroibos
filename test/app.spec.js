@@ -112,4 +112,35 @@ describe("Application", () => {
         })
     })
   })
+
+  describe("Olympians statistics endpoint", () => {
+    beforeAll(async () => {
+      shell.exec('npx knex migrate:rollback --all')
+      shell.exec('npx knex migrate:latest')
+      await Team.create({name: "Canada"}).then(([team]) => canadaId = team.id)
+      await Team.create({name: "Germany"}).then(([team]) => germanyId = team.id)
+      await Sport.create({name: "Athletics"}).then(([sport]) => athleticsId = sport.id)
+      await Sport.create({name: "Diving"}).then(([sport]) => divingId = sport.id)
+      await Olympian.create({name: "Ryan Reynolds", team_id: canadaId, sport_id: athleticsId, age: 42, height: 150, weight: 140, sex: "M"})
+        .then(([olympian]) => ryanId = olympian.id)
+      await Olympian.create({name: "Michelle Person", team_id: germanyId, sport_id: divingId, age: 26, height: 120, weight: 110, sex: "F"})
+        .then(([olympian]) => michelleId = olympian.id)
+      await Event.create({name: "400M Sprint", sport_id: athleticsId}).then(([e]) => sprintId = e.id)
+      await Event.create({name: "Platform Dive", sport_id: divingId}).then(([e]) => platformId = e.id)
+      await EventMedalist.create({olympian_id: ryanId, event_id: sprintId, medal: "Gold"})
+    })
+
+    test("Olympian statistics returns statictical information", () => {
+      return request(app).get("/api/v1/olympian_stats")
+        .then(response => {
+          expect(response.status).toBe(200)
+          stats = response.body.olympian_stats
+          expect(stats.total_competing_olympians).toBe(2)
+          expect(stats.average_weight.unit).toBe("kg")
+          expect(parseFloat(stats.average_weight.male_olympians)).toBe(parseFloat(140))
+          expect(parseFloat(stats.average_weight.female_olympians)).toBe(parseFloat(110))
+          expect(parseFloat(stats.average_age)).toBe(parseFloat(34))
+        })
+    })
+  })
 })

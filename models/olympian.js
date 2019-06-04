@@ -63,6 +63,20 @@ module.exports = class Olympian {
      .limit(1);
   }
 
+  static statistics() {
+    let test = {
+      male: "M",
+      female: "F"
+    }
+    return knex('olympians')
+      .select({
+        total_competing_olympians: knex.raw("COUNT(olympians.id)"),
+        average_male_weight: knex.raw("AVG(CASE WHEN olympians.sex = :male THEN olympians.weight ELSE null END)", test),
+        average_female_weight: knex.raw("AVG(CASE WHEN olympians.sex = :female THEN olympians.weight ELSE null END)", test),
+        average_age: knex.raw("AVG(olympians.age)")
+      })
+  }
+
   static find(id) {
     return new Promise((resolve, reject) => {
       knex("olympians").select("*").where('id', id).limit(1)
