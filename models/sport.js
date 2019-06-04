@@ -38,7 +38,7 @@ module.exports = class Sport {
     return new Promise((resolve, reject) => {
       knex('sport').where("name", sport.name)
       .then((sport) => {
-        return sport.length ? sport : Team.create(sport)
+        return sport.length ? sport : Sport.create(sport)
       })
       .then(([sport]) => resolve(sport))
       .catch(error => reject(error))
