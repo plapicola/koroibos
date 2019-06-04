@@ -6,6 +6,7 @@ module.exports = class OlympianStatsController {
     res.setHeader("Content-Type", "application/json")
     OlympianStatsIndexFacade.get_statistics()
     .then(facade => {
+      console.log(facade.body);
       res.status(facade.status).send(OlympianStatsSerializer.formatOne(facade.body))
     })
     .catch(facade => {
