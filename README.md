@@ -1,5 +1,28 @@
 # Koroibos Challenge
 
+### Introduction
+
+This application is intended to act as a basic backend for tracking olympians, events, and medalists.
+
+### Dependencies
+
+The application requires the following dependencies prior to setup:
+
+- Node.js
+- Express.js
+- PostgreSQL
+
+### Initial Setup:
+
+You will need to manually create a database for `koroibos_development` and `koroibos_test`.
+
+``` bash
+npm install # Installs required dependencies
+npx knex migrate:latest # Run migrations for database
+```
+
+Once the dependencies have been installed and the database has been created, you may start the application using the command `npm start`.
+
 ### Using the application
 
 ##### Import Script
@@ -132,3 +155,33 @@ The application can return all the medalists for a particular event. A sample re
     ]
 }
 ```
+
+### Testing
+
+To execute the test suite, run the command `npm test`. Testing is handled through the Jest library.
+
+### Known Issues
+
+- Formatting of events with no medalist information contains nulls for a single medal.
+
+### Contributing
+
+To contribute to this project, please fork and issue a pull request to the master branch with a note indicating changes made.
+
+### Core Contributors
+
+- @plapicola (Author)
+
+### Database Schema
+
+![Database Schema](/schema.png)
+
+### Tech Stack
+
+This application was built using the following technologies:
+
+- Node.js
+- Express.js
+- Knex
+- PostgreSQL
+- Heroku
