@@ -9,7 +9,7 @@ module.exports = class MedalistsIndexFacade {
   static get_medalists(id) {
     return new Promise((resolve, reject) => {
       Event.medalists(id)
-      .then(medalists => resolve(new MedalistsIndexFacade(200, medalists)))
+      .then(medalists => resolve(new MedalistsIndexFacade(200, medalists[0])))
       .catch(error => reject(new MedalistsIndexFacade(500, error)))
     })
   }
