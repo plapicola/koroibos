@@ -145,7 +145,7 @@ describe("Application", () => {
   })
 
   describe("Event medalists endpoint", () => {
-    beforeAll(() => {
+    beforeAll(async () => {
       shell.exec('npx knex migrate:rollback --all')
       shell.exec('npx knex migrate:latest')
       await Team.create({name: "Canada"}).then(([team]) => canadaId = team.id)

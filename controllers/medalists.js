@@ -1,4 +1,4 @@
-var MedalistsIndexFacade = require('../facades/medalists')
+var MedalistsIndexFacade = require('../facades/medalists_index')
 var MedalistsSerializer = require('../serializers/medalists')
 
 module.exports = class MedalistsController {
