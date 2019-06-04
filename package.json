@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "npx jest --passWithNoTests --runInBand --forceExit"
+    "test": "npx jest --passWithNoTests --runInBand --forceExit",
+    "import": "node import.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
+    "csv-parse": "^4.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "knex": "^0.17.2",

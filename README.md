@@ -2,6 +2,10 @@
 
 ### Using the application
 
+##### Import Script
+
+The application has a script to load in the seed data included with the application. This can be run using the command `npm run import`.
+
 ##### GET /api/v1/olympians
 
 The application can return a list of all olympians. A sample response can be found below:

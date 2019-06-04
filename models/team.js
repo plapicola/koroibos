@@ -20,4 +20,15 @@ module.exports = class Team {
       .catch(error => reject(error))
     })
   }
+
+  static find_or_create(team) {
+    return new Promise((resolve, reject) => {
+      knex('teams').where("name", team.name)
+      .then((teams) => {
+        return teams.length ? teams : Team.create(team)
+      })
+      .then(([team]) => resolve(team))
+      .catch(error => reject(error))
+    })
+  }
 }
