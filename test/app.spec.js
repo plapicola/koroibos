@@ -143,4 +143,35 @@ describe("Application", () => {
         })
     })
   })
+
+  describe("Event medalists endpoint", () => {
+    beforeAll(() => {
+      shell.exec('npx knex migrate:rollback --all')
+      shell.exec('npx knex migrate:latest')
+      await Team.create({name: "Canada"}).then(([team]) => canadaId = team.id)
+      await Sport.create({name: "Athletics"}).then(([sport]) => athleticsId = sport.id)
+      await Olympian.create({name: "Ryan Reynolds", team_id: canadaId, sport_id: athleticsId, age: 42, height: 150, weight: 140, sex: "M"})
+        .then(([olympian]) => ryanId = olympian.id)
+      await Olympian.create({name: "Michael Fassbender", team_id: canadaId, sport_id: athleticsId, age: 30, height: 140, weight: 120, sex: "M"})
+        .then(([olympian]) => michaelId = olympian.id)
+      await Event.create({name: "400M Sprint", sport_id: athleticsId}).then(([e]) => sprintId = e.id)
+      await EventMedalist.create({olympian_id: ryanId, event_id: sprintId, medal: "Gold"})
+      await EventMedalist.create({olympian_id: michaelId, event_id: sprintId, medal: "Silver"})
+    })
+
+    test("Returns all medalists for an event", () => {
+      return request(app).get(`/api/v1/events/${sprintId}/medalists`)
+        .then(response => {
+          expect(response.status).toBe(200)
+          expect(response.body.event).toBe("400M Sprint")
+          expect(Array.isArray(response.body.medalists)).toBe(true)
+          expect(response.body.medalists.length).toBe(2)
+          medalist_1 = response.body.medalists[0]
+          expect(medalist_1.name).toBe("Ryan Reynolds")
+          expect(medalist_1.team).toBe("Canada")
+          expect(medalist_1.age).toBe(42)
+          expect(medalist_1.medal).toBe("Gold")
+        })
+    })
+  })
 })
