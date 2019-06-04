@@ -33,4 +33,15 @@ module.exports = class Sport {
       .catch(error => reject(error))
     })
   }
+
+  static find_or_create(sport) {
+    return new Promise((resolve, reject) => {
+      knex('sport').where("name", sport.name)
+      .then((sport) => {
+        return sport.length ? sport : Team.create(sport)
+      })
+      .then(([sport]) => resolve(sport))
+      .catch(error => reject(error))
+    })
+  }
 }
